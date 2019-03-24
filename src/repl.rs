@@ -75,7 +75,7 @@ impl Repl {
     ///
     /// repl.start(&GnuReadLine);
     /// ```
-    pub fn start<E: Display>(&self, read_line: &ReadLine<E>) {
+    pub fn start<E: Display>(&self, read_line: &mut ReadLine<E>) {
         let mut command = String::new();
 
         let single = self.name.clone() + "> ";

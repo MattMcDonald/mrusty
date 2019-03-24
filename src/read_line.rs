@@ -17,10 +17,10 @@ use rl_sys::ReadlineError;
 /// A `trait` which performs very basic readline utility.
 pub trait ReadLine<Error: Display> {
     /// A function that reads one line from the terminal.
-    fn read(&self, prompt: &str) -> Result<Option<String>, Error>;
+    fn read(&mut self, prompt: &str) -> Result<Option<String>, Error>;
 
     /// A function that add one line to the readline history.
-    fn add(&self, line: &str);
+    fn add(&mut self, line: &str);
 }
 
 /// A `struct` that implements `ReadLine` with very basic gnureadline functionality.
