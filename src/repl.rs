@@ -91,8 +91,7 @@ impl Repl {
             };
 
             let input = match read_line.read(head) {
-                Ok(Some(s)) => s,
-                Ok(None) => break,
+                Ok(s) => s,
                 Err(e) => {
                     println!("{}", e);
 
