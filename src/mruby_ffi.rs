@@ -210,7 +210,7 @@ impl MrValue {
     }
 }
 
-#[allow(dead_code)]
+#[allow(dead_code, non_camel_case_types)]
 #[repr(C)]
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum MrType {
@@ -237,6 +237,8 @@ pub enum MrType {
     MRB_TT_ENV,
     MRB_TT_DATA,
     MRB_TT_FIBER,
+    MRB_TT_ISTRUCT,     
+    MRB_TT_BREAK,      
     MRB_TT_MAXDEFINE
 }
 
