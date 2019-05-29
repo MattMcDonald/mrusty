@@ -13,6 +13,8 @@ use std::fs::File;
 
 use tar::Archive;
 use walkdir::{DirEntry, WalkDir, WalkDirIterator};
+use std::path::Path;
+
 
 fn is_c(entry: &DirEntry) -> bool {
     match entry.path().extension() {
@@ -33,7 +35,14 @@ fn main() {
         if is_c(&entry) { config.file(entry.path()); }
     }
 
-    config.include("target/mruby-out/include").compile("libmruby.a");
+
+    config.include("target/mruby-out/include").include("target/mruby-out/src");
+    for entry in Path::new("target/mruby-out/src/mrbgems").read_dir().unwrap().into_iter() {
+        let entry = entry.unwrap();
+
+        config.include( format!("{}/include", entry.path().to_str().unwrap()) );
+    }
+    config.compile("libmruby.a");
 
     let mut config = cc::Build::new();
 

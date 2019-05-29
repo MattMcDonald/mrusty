@@ -14,7 +14,7 @@
 # * compile, linker & archiver
 # * unzip
 
-VERSION=1.2.0
+VERSION=2.0.1
 CURRENT=$PWD
 
 # Checks is /tmp/mruby needs cleaning or creation.
@@ -51,9 +51,9 @@ cp build/host/mrblib/mrblib.c ../mruby-out/src/mrblib/mrblib.c
 
 # Removes incompatible files.
 
-find mrbgems -type f ! -name "*.c" -and ! -name "*.h" -and ! -name "*.def" -delete
+find mrbgems -type f ! -name "*.cstub" -and ! -name "*.c" -and ! -name "*.h" -and ! -name "*.def" -delete
 find mrbgems -type d -empty -delete
-find build/host/mrbgems -type f ! -name "*.c" -and ! -name "*.h" -delete
+find build/host/mrbgems -type f ! -name "*.cstub" ! -name "*.c" -and ! -name "*.h" -delete
 find build/host/mrbgems -type d -empty -delete
 
 # Removes incompatible gems.
