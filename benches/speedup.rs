@@ -1,15 +1,12 @@
-#![feature(test)]
-
-extern crate test;
-
 #[macro_use]
 extern crate mrusty;
 
-use test::Bencher;
+#[macro_use]
+extern crate bencher;
+use bencher::Bencher;
 
 use mrusty::{Mruby, MrubyImpl};
 
-#[bench]
 fn fib_rust(b: &mut Bencher) {
     fn fib(n: i32) -> i32 {
         if n <= 2 {
@@ -20,13 +17,12 @@ fn fib_rust(b: &mut Bencher) {
     }
 
     b.iter(|| {
-        let n = test::black_box(20);
+        let n = bencher::black_box(20);
 
         fib(n)
     });
 }
 
-#[bench]
 fn fib_rusty(b: &mut Bencher) {
     let mruby = Mruby::new();
 
@@ -49,7 +45,6 @@ fn fib_rusty(b: &mut Bencher) {
     });
 }
 
-#[bench]
 fn fib_ruby(b: &mut Bencher) {
     let mruby = Mruby::new();
 
@@ -67,3 +62,6 @@ fn fib_ruby(b: &mut Bencher) {
         mruby.run("fib 20").unwrap()
     });
 }
+
+benchmark_group!(benches, fib_ruby, fib_rusty, fib_rust);
+benchmark_main!(benches);

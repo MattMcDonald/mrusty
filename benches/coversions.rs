@@ -1,15 +1,12 @@
-#![feature(test)]
 
-extern crate test;
-
-#[macro_use]
 extern crate mrusty;
-
-use test::Bencher;
-
 use mrusty::{Mruby, MrubyImpl};
 
-#[bench]
+#[macro_use]
+extern crate bencher;
+use bencher::Bencher;
+
+
 fn convert_fixnum(b: &mut Bencher) {
     let mruby = Mruby::new();
 
@@ -20,7 +17,6 @@ fn convert_fixnum(b: &mut Bencher) {
     });
 }
 
-#[bench]
 fn convert_string(b: &mut Bencher) {
     let mruby = Mruby::new();
 
@@ -31,7 +27,6 @@ fn convert_string(b: &mut Bencher) {
     });
 }
 
-#[bench]
 fn convert_obj(b: &mut Bencher) {
     struct Cont;
 
@@ -45,3 +40,6 @@ fn convert_obj(b: &mut Bencher) {
         obj.to_obj::<Cont>().unwrap()
     });
 }
+
+benchmark_group!(benches, convert_obj, convert_string, convert_fixnum);
+benchmark_main!(benches);

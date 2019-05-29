@@ -18,5 +18,8 @@ walkdir = "0.1.5"
 [features]
 gnu-readline = ["rl-sys"]
 
+[dev-dependencies]
+bencher = "0.1.5"
+
 [dependencies]
 rl-sys = { version = "0.4.1", optional = true }
